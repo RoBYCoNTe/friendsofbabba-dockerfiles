@@ -1,7 +1,7 @@
 version: "3"
 services:
   web:
-    container_name: boilerplate_v2_web
+    container_name: babba_web
     build:
       context: ../
       dockerfile: dockerfiles/nginx/Dockerfile
@@ -19,7 +19,7 @@ services:
     stdin_open: true
     tty: true
   php:
-    container_name: boilerplate_v2_php
+    container_name: babba_php
     build:
       context: ../
       dockerfile: dockerfiles/php/Dockerfile
@@ -35,15 +35,15 @@ services:
   db:
     image: mariadb
     restart: always
-    container_name: boilerplate_v2_db
+    container_name: babba_db
     volumes:
-      - boilerplate_v2_db:/var/lib/mysql:delegated
+      - babba_db:/var/lib/mysql:delegated
     environment:
-      MYSQL_ROOT_PASSWORD: boilerplate_v2
-      MYSQL_DATABASE: boilerplate_v2
-      MYSQL_USER: boilerplate_v2
-      MYSQL_PASSWORD: boilerplate_v2
+      MYSQL_ROOT_PASSWORD: babba
+      MYSQL_DATABASE: babba
+      MYSQL_USER: babba
+      MYSQL_PASSWORD: babba
     ports:
       - 3306:3306
 volumes:
-  boilerplate_v2_db:
+  babba_db:
