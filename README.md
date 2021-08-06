@@ -1,15 +1,16 @@
-# Dockerfiles for CakePHP 4.x Installation
+# Dockerfiles for CakePHP 4.x Installation 🥧
 
-This is a basic docker configuration necessary to work with CakePHP 4.x project.
-To create your new CakePHP 4.x project:
+Basic docker configuration to setup ready to use CakePHP 4.x project.
+
+Choose prefered local URL to use editing `dockerfiles/nginx/site.template` (now we have babba.local)
 
 ```sh
 
 git clone https://github.com/RoBYCoNTe/friendsofbabba-dockerfiles.git myapp
-cd myapp
+cd myapp/dockerfiles
 docker compose up -d
 docker exec -it babba_php bash
-composer create-project --prefer-dist cakephp/app:~4.0 .
+./install.sh
 ```
 
 ## Tips
