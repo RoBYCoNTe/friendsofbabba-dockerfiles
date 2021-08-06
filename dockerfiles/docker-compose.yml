@@ -1,0 +1,49 @@
+version: "3"
+services:
+  web:
+    container_name: boilerplate_v2_web
+    build:
+      context: ../
+      dockerfile: dockerfiles/nginx/Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ../:/var/www/html:delegated
+      - ./certs:/etc/nginx/certs:delegated
+      - /var/www/html/.git
+      - /var/www/html/.vscode
+      - /var/www/html/dockerfiles
+    links:
+      - php
+    stdin_open: true
+    tty: true
+  php:
+    container_name: boilerplate_v2_php
+    build:
+      context: ../
+      dockerfile: dockerfiles/php/Dockerfile
+    ports:
+      - 9000:9000
+    volumes:
+      - ../:/var/www/html:delegated
+      - /var/www/html/.git
+      - /var/www/html/.vscode
+      - /var/www/html/dockerfiles
+    environment:
+      XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9003 remote_enable=1
+  db:
+    image: mariadb
+    restart: always
+    container_name: boilerplate_v2_db
+    volumes:
+      - boilerplate_v2_db:/var/lib/mysql:delegated
+    environment:
+      MYSQL_ROOT_PASSWORD: boilerplate_v2
+      MYSQL_DATABASE: boilerplate_v2
+      MYSQL_USER: boilerplate_v2
+      MYSQL_PASSWORD: boilerplate_v2
+    ports:
+      - 3306:3306
+volumes:
+  boilerplate_v2_db:
