@@ -1,13 +1,13 @@
 FROM php:8.0-fpm
 
-RUN groupadd --gid 1000 boilerplate_v2 \
-    && useradd --shell /sbin/nologin --gid 1000 --uid 1000 boilerplate_v2
+RUN groupadd --gid 1000 babba \
+    && useradd --shell /sbin/nologin --gid 1000 --uid 1000 babba
 
 RUN apt-get -y update \
-    && apt-get install -y libicu-dev git zip unzip python python-pip \
+    && apt-get install -y libicu-dev git zip unzip \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl
-RUN docker-php-ext-install mysqli pdo pdo_mysql \
+RUN docker-php-ext-install pdo pdo_mysql \
     && docker-php-ext-enable pdo_mysql
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
@@ -26,4 +26,4 @@ WORKDIR /var/www/html
 VOLUME /var/www/html
 COPY . /var/www/html/
 
-RUN chown -R boilerplate_v2:boilerplate_v2 /var/www/html
+RUN chown -R babba:babba /var/www/html

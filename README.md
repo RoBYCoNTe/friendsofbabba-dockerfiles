@@ -10,6 +10,7 @@ git clone https://github.com/RoBYCoNTe/friendsofbabba-dockerfiles.git myapp
 cd myapp/dockerfiles
 docker compose up -d
 docker exec -it babba_php bash
+cd /var/www/html
 ./install.sh
 ```
 
