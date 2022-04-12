@@ -9,7 +9,8 @@ With [https://mutagen.io/](https://mutagen.io/) you can run this project with
 the following command:
 
 ```sh
-cd dockerfiles
+git clone git@github.com:RoBYCoNTe/friendsofbabba-dockerfiles.git yourprojectname
+cd yourprojectname/dockerfiles
 sh build-mutagen-config
 mutagen project start
 ```
