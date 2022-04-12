@@ -16,7 +16,6 @@ sync:
     ignore:
       paths:
         - "dockerfiles"
-        - "dockerfiles-mutaegn"
         - "mutagen.yml"
         - "mutagen.yml.lock"
         - ".vagrant"

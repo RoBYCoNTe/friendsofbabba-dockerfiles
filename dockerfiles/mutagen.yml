@@ -15,8 +15,7 @@ sync:
     mode: "two-way-resolved"
     ignore:
       paths:
-        - "dockerfiles"
-        - "dockerfiles-mutaegn"
+        - "dockerfiles/*"
         - "mutagen.yml"
         - "mutagen.yml.lock"
         - ".vagrant"
