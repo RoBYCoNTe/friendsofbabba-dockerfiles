@@ -1,12 +1,12 @@
 server {
-    listen 80;
+    listen ${NGINX_PORT};
     #listen *:443 ssl;
 
-    server_name babba.local;
+    server_name ${NGINX_HOST};
 
     #ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    #ssl_certificate /etc/nginx/certs/${NGINX_SERVER_NAME}.pem;
-    #ssl_certificate_key /etc/nginx/certs/${NGINX_SERVER_NAME}-key.pem;
+    #ssl_certificate /etc/nginx/certs/${NGINX_HOST}.pem;
+    #ssl_certificate_key /etc/nginx/certs/${NGINX_HOST}-key.pem;
 
     # root directive should be global
     root   /var/www/html/webroot/;

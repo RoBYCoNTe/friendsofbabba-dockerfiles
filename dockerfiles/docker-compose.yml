@@ -1,7 +1,7 @@
 version: "3"
 services:
   web:
-    container_name: babba_web
+    container_name: ${APP_NAME}_web
     build:
       context: ../
       dockerfile: dockerfiles/nginx/Dockerfile
@@ -16,10 +16,14 @@ services:
       - /var/www/html/dockerfiles
     links:
       - php
-    stdin_open: true
     tty: true
+    environment:
+      NGINX_HOST: ${NGINX_HOST}
+      NGINX_PORT: ${NGINX_PORT}
+    # command: /bin/bash -c "envsubst < /etc/nginx/conf.d/site.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+
   php:
-    container_name: babba_php
+    container_name: ${APP_NAME}_php
     build:
       context: ../
       dockerfile: dockerfiles/php/Dockerfile
@@ -32,18 +36,22 @@ services:
       - /var/www/html/dockerfiles
     environment:
       XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9003 remote_enable=1
+      DB_PASS: ${DB_PASS}
+      DB_USER: ${DB_USER}
+      DB_HOST: ${DB_HOST}
   db:
     image: mariadb
     restart: always
-    container_name: babba_db
+    container_name: ${APP_NAME}_db
     volumes:
-      - babba_db:/var/lib/mysql:delegated
+      - db:/var/lib/mysql:delegated
     environment:
-      MYSQL_ROOT_PASSWORD: babba
-      MYSQL_DATABASE: babba
-      MYSQL_USER: babba
-      MYSQL_PASSWORD: babba
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
     ports:
       - 3306:3306
 volumes:
-  babba_db:
+  db:
+    name: ${APP_NAME}_db
