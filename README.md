@@ -62,6 +62,14 @@ mutagen project start
 docker exec -it friendsofbabba_php bash
 composer create-project --prefer-dist cakephp/app:4.2 /var/www/app --no-interaction
 mv /var/www/app/* /var/www/html/
+chown -R www-data:www-data /var/www/html
+```
+
+After this big step you will have to restore permission for the web container too:
+
+```sh
+docker exec -it friendsofbabba_web bash
+chown -R www-data:www-data /var/www/html
 ```
 
 **Notes**: mv command is necessary to move all files from the project root
