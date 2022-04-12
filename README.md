@@ -3,6 +3,13 @@
 Basic docker configuration to setup ready to use CakePHP 4.x project.
 This configuration can work as starting point for your own configuration.
 
+**Notes**: the name `friendsofbabba` used in this configuration is just a suggestion
+and must be referencing the env variable APP_NAME configured in `.env` file.
+
+Suppose you have configured `hello_world` as your application name in `.env` file.
+You will have these containers: hello_world_php, hello_world_web, hello_world_db,
+use their names to reference them in your commands during installation.
+
 ## Prepare your project
 
 To prepare your own CakePHP 4.x project you have to get a copy of this repository.
@@ -57,7 +64,8 @@ composer create-project --prefer-dist cakephp/app:4.2 /var/www/app --no-interact
 mv /var/www/app/* /var/www/html/
 ```
 
-**Notes**: mv command is necessary to move all files from the project root to the web root.
+**Notes**: mv command is necessary to move all files from the project root
+to the web root and can take a while to be completed (because of mutagen sync).
 
 ### Configure database
 

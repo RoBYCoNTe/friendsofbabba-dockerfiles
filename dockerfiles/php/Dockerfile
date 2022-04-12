@@ -1,7 +1,7 @@
 FROM php:8.0-fpm
 
-RUN groupadd --gid 1000 friendsofbabba \
-    && useradd --shell /sbin/nologin --gid 1000 --uid 1000 friendsofbabba
+RUN groupadd --gid 1000 webuser \
+    && useradd --shell /sbin/nologin --gid 1000 --uid 1000 webuser
 
 RUN apt-get -y update \
     && apt-get install -y libicu-dev git zip unzip \
@@ -26,4 +26,4 @@ WORKDIR /var/www/html
 VOLUME /var/www/html
 COPY . /var/www/html/
 
-RUN chown -R friendsofbabba:friendsofbabba /var/www/html
+RUN chown -R webuser:webuser /var/www/html

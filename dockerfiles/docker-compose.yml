@@ -9,7 +9,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ../:/var/www/html:delegated
+      - code:/var/www/html:delegated
       - ./certs:/etc/nginx/certs:delegated
       - /var/www/html/.git
       - /var/www/html/.vscode
@@ -30,7 +30,7 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - ../:/var/www/html:delegated
+      - code:/var/www/html:delegated
       - /var/www/html/.git
       - /var/www/html/.vscode
       - /var/www/html/dockerfiles
@@ -56,3 +56,5 @@ services:
 volumes:
   db:
     name: ${APP_NAME}_db
+  code:
+    name: ${APP_NAME}_code
