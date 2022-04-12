@@ -3,57 +3,20 @@
 Basic docker configuration to setup ready to use CakePHP 4.x project.
 This configuration can work as starting point for your own configuration.
 
-## How to run
+## Prepare your project
 
-With [https://mutagen.io/](https://mutagen.io/) you can run this project with
-the following command:
+To prepare your own CakePHP 4.x project you have to get a copy of this repository.
 
 ```sh
 git clone git@github.com:RoBYCoNTe/friendsofbabba-dockerfiles.git yourprojectname
-cd yourprojectname/dockerfiles
-sh build-mutagen-config
-mutagen project start
+cd yourprojectname
+rm -rf .git
 ```
-
-The command `sh build-mutagen-config.sh` will create a `mutagen.yml` file in the
-current directory with injected variables from the `.env` file (**this command
-must be executed only onetime or when something changes in .env file**).
-
-If you encounter problems during application bootstrap you can rebuild
-docker infrastructure using this command:
-
-```sh
-docker compose up -d --build --force-recreate --remove-orphans
-```
-
-After that command you can restart mutagen:
-
-```sh
-mutagen project start
-```
-
-Using standard docker-compose.yml file you can run the project with the following
-command:
-
-```sh
-docker compose up
-```
-
-## First setup
-
-First time you need to run the following commands:
-
-```sh
-docker exec -it friendsofbabba_php bash
-sh install.sh
-```
-
-Previous command will install full CakePHP 4.x stack.
-After you have to inject environment variables in to config/app.php file.
 
 ## Environment Vars
 
-You can use many environment variables to configure your project.
+Before start your own project you have to set some environment variables.
+To do this you have to customize the following lines to your `.env` file:
 
 | Variable     | Description                                                         |
 | ------------ | ------------------------------------------------------------------- |
@@ -66,4 +29,60 @@ You can use many environment variables to configure your project.
 | `DB_USER`    | Database user, will be used as default user for database containers |
 | `DB_PASS`    | Database password, will be used as default password for database    |
 
-**You can customize** every aspect of your project by editing `dockerfiles/.env` file.
+## How to run
+
+This project is configured to work with [https://mutagen.io/](https://mutagen.io/).
+
+### Build mutagen configuration file
+
+```sh
+cd yourprojectname/dockerfiles
+sh build-mutagen-config
+mutagen project start
+```
+
+### Run mutagen infrastructure
+
+```sh
+mutagen project start
+```
+
+**Notes**: previous command can take a while to run (be patient).
+
+### Install CakePHP 4.x
+
+```sh
+docker exec -it friendsofbabba_php bash
+composer create-project --prefer-dist cakephp/app:4.2 /var/www/app --no-interaction
+mv /var/www/app/* /var/www/html/
+```
+
+**Notes**: mv command is necessary to move all files from the project root to the web root.
+
+### Configure database
+
+Open the file `config/app_local.php` and change `Database` section like this:
+
+```php
+...
+    'Datasources' => [
+        'default' => [
+            'host' => env('DB_HOST'),
+            /*
+             * CakePHP will use the default DB port based on the driver selected
+             * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
+             * the following line and set the port accordingly
+             */
+            //'port' => 'non_standard_port_number',
+
+            'username' => env('DB_USER'),
+            'password' => env('DB_PASS'),
+            'database' => env('DB_NAME'),
+...
+```
+
+### Check your project
+
+To check if everything is working open your browser and navigate
+to configured NGINX_HOST in `.env` file. If something goes wrong open an issues,
+I will try to help you.
