@@ -26,4 +26,4 @@ WORKDIR /var/www/html
 VOLUME /var/www/html
 COPY . /var/www/html/
 
-RUN chown -R webuser:webuser /var/www/html
+RUN chown -R webuser:webuser /var/www
