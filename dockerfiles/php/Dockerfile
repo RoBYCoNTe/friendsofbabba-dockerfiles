@@ -4,9 +4,13 @@ RUN groupadd --gid 1000 webuser \
     && useradd --shell /sbin/nologin --gid 1000 --uid 1000 webuser
 
 RUN apt-get -y update \
-    && apt-get install -y libicu-dev git zip unzip \
+    && apt-get install -y libicu-dev git zip unzip libfreetype6-dev libjpeg62-turbo-dev libpng-dev zip libzip-dev \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl
+    && docker-php-ext-install intl \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-install gd \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install zip
 RUN docker-php-ext-install pdo pdo_mysql \
     && docker-php-ext-enable pdo_mysql
 RUN pecl install xdebug
