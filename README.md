@@ -45,13 +45,13 @@ This project is configured to work with [https://mutagen.io/](https://mutagen.io
 ```sh
 cd yourprojectname/dockerfiles
 sh build-mutagen-config
-mutagen project start
+sh start.sh
 ```
 
 ### Run mutagen infrastructure
 
 ```sh
-mutagen project start
+sh start.sh
 ```
 
 **Notes**: previous command can take a while to run (be patient).
