@@ -60,7 +60,7 @@ sh start.sh
 
 ```sh
 docker exec -it friendsofbabba_php bash
-composer create-project --prefer-dist cakephp/app:4.2 /var/www/app --no-interaction
+composer create-project --prefer-dist cakephp/app:^4.3 /var/www/app --no-interaction
 mv /var/www/app/* /var/www/html/
 chown -R www-data:www-data /var/www/html
 ```
