@@ -1,5 +1,5 @@
 beforeCreate:
-  # - docker compose up -d #--build --force-recreate --remove-orphans
+  - docker compose up -d #--build --force-recreate --remove-orphans
   - docker exec -it friendsofbabba_php chown -R www-data:www-data /var/www/
   - docker exec -it friendsofbabba_web chown -R www-data:www-data /var/www/
 afterTerminate:
@@ -25,4 +25,3 @@ sync:
         - ".github"
         - "deploy"
         - "tmp"
-        - "README.md"

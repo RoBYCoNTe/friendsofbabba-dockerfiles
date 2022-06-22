@@ -18,5 +18,7 @@ echo "🌐 Website: $NGINX_HOST (remember to add it to you hosts file)"
 export APP_NAME=$APP_NAME
 
 envsubst < ./mutagen.template.yml > ./mutagen.yml
+envsubst < ./start.template.sh > ./start.sh
+envsubst < ./stop.template.sh > ./stop.sh
 
 echo "✔️  Done, exec mutagen project start to run!"
