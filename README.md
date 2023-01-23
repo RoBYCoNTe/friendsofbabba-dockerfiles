@@ -44,7 +44,7 @@ This project is configured to work with [https://mutagen.io/](https://mutagen.io
 
 ```sh
 cd yourprojectname/dockerfiles
-sh build-mutagen-config
+sh build-mutagen-config.sh
 sh start.sh
 ```
 
